@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { register, login, getMe } from '../controllers/authController.js';
-import { protect, authorize } from '../middleware/auth.js';
+import { protect, optionalProtect } from '../middleware/auth.js';
 
 const router = Router();
 
-router.post('/register', protect, authorize('admin'), register);
+router.post('/register', optionalProtect, register);
 router.post('/login', login);
 router.get('/me', protect, getMe);
 
