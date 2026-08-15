@@ -7,12 +7,12 @@ import { useAuth } from '../context/AuthContext';
 const emptyForm = { name: '', contactPerson: '', email: '', phone: '', address: '' };
 
 export default function Suppliers() {
-  const { hasRole } = useAuth();
+  const { user, hasRole } = useAuth();
   const [suppliers, setSuppliers] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState(null);
   const [form, setForm] = useState(emptyForm);
-  const canEdit = hasRole('admin', 'manager');
+  const canEdit = !!user;
 
   const load = useCallback(async () => {
     const { data } = await api.get('/suppliers');

@@ -18,7 +18,7 @@ const emptyForm = {
 };
 
 export default function Products() {
-  const { hasRole } = useAuth();
+  const { user, hasRole } = useAuth();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
@@ -28,7 +28,7 @@ export default function Products() {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('');
 
-  const canEdit = hasRole('admin', 'manager');
+  const canEdit = !!user;
 
   const load = useCallback(async () => {
     const params = new URLSearchParams();
